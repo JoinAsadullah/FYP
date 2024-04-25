@@ -2,8 +2,8 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <main className="bg-gray-100 h-svh">
-      <section className="h-20 flex justify-between items-center">
+    <main className=" h-svh">
+      <section className="bg-gray-100 h-20 flex justify-between items-center">
         <div className=" ml-4 flex justify-between items-center">
           <h1 className="font-semibold text-3xl text-green-600">Ranking</h1>
           <h1 className="font-black text-gray-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
@@ -31,7 +31,74 @@ export default function Home() {
         </div>
       </section>
       <section className="h-[300px] bg-white relative top-[20%]">
-        
+        <section className="mx-4 grid grid-cols-2 md:grid-cols-4 gap-4 my-6">
+          <div
+            className="rounded-lg border text-card-foreground shadow-sm bg-gray-200"
+            data-v0-t="card"
+          >
+            <div className="flex flex-col space-y-1.5 p-6">
+              <h3 className="whitespace-nowrap text-2xl font-semibold leading-none tracking-tight">
+                Cities
+              </h3>
+            </div>
+            <div className="p-6">
+              <p className="text-3xl font-semibold">57</p>
+            </div>
+          </div>
+          <div
+            className="rounded-lg border text-card-foreground shadow-sm bg-gray-200"
+            data-v0-t="card"
+          >
+            <div className="flex flex-col space-y-1.5 p-6">
+              <h3 className="whitespace-nowrap text-2xl font-semibold leading-none tracking-tight">
+                Cities
+              </h3>
+            </div>
+            <div className="p-6">
+              <p className="text-3xl font-semibold">57</p>
+            </div>
+          </div>
+          <div
+            className="rounded-lg border text-card-foreground shadow-sm bg-gray-200"
+            data-v0-t="card"
+          >
+            <div className="flex flex-col space-y-1.5 p-6">
+              <h3 className="whitespace-nowrap text-2xl font-semibold leading-none tracking-tight">
+                Cities
+              </h3>
+            </div>
+            <div className="p-6">
+              <p className="text-3xl font-semibold">57</p>
+            </div>
+          </div>
+          <div
+            className="rounded-lg border text-card-foreground shadow-sm bg-gray-200"
+            data-v0-t="card"
+          >
+            <div className="flex flex-col space-y-1.5 p-6">
+              <h3 className="whitespace-nowrap text-2xl font-semibold leading-none tracking-tight">
+                Cities
+              </h3>
+            </div>
+            <div className="p-6">
+              <p className="text-3xl font-semibold">57</p>
+            </div>
+          </div>
+          <div
+            className="rounded-lg border text-card-foreground shadow-sm bg-gray-200"
+            data-v0-t="card"
+          >
+            <div className="flex flex-col space-y-1.5 p-6">
+              <h3 className="whitespace-nowrap text-2xl font-semibold leading-none tracking-tight">
+                Cities
+              </h3>
+            </div>
+            <div className="p-6">
+              <p className="text-3xl font-semibold">57</p>
+            </div>
+          </div>
+        </section>
+
       </section>
     </main>
   );
