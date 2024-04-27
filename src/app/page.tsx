@@ -96,6 +96,7 @@ export default function Home() {
             <div className="p-6">
               <p className="text-3xl font-semibold">57</p>
             </div>
+          </div>
             <div
             className="rounded-lg border text-card-foreground shadow-sm bg-gray-200"
             data-v0-t="card"
@@ -110,7 +111,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-
       </section>
     </main>
   );
