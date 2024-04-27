@@ -38,7 +38,7 @@ export default function Home() {
           >
             <div className="flex flex-col space-y-1.5 p-6">
               <h3 className="whitespace-nowrap text-2xl font-semibold leading-none tracking-tight">
-                Cities
+                City
               </h3>
             </div>
             <div className="p-6">
@@ -51,7 +51,7 @@ export default function Home() {
           >
             <div className="flex flex-col space-y-1.5 p-6">
               <h3 className="whitespace-nowrap text-2xl font-semibold leading-none tracking-tight">
-                Cities
+                University
               </h3>
             </div>
             <div className="p-6">
@@ -64,7 +64,7 @@ export default function Home() {
           >
             <div className="flex flex-col space-y-1.5 p-6">
               <h3 className="whitespace-nowrap text-2xl font-semibold leading-none tracking-tight">
-                Cities
+                Campus
               </h3>
             </div>
             <div className="p-6">
@@ -77,7 +77,7 @@ export default function Home() {
           >
             <div className="flex flex-col space-y-1.5 p-6">
               <h3 className="whitespace-nowrap text-2xl font-semibold leading-none tracking-tight">
-                Cities
+                Department
               </h3>
             </div>
             <div className="p-6">
@@ -90,7 +90,19 @@ export default function Home() {
           >
             <div className="flex flex-col space-y-1.5 p-6">
               <h3 className="whitespace-nowrap text-2xl font-semibold leading-none tracking-tight">
-                Cities
+                Program
+              </h3>
+            </div>
+            <div className="p-6">
+              <p className="text-3xl font-semibold">57</p>
+            </div>
+            <div
+            className="rounded-lg border text-card-foreground shadow-sm bg-gray-200"
+            data-v0-t="card"
+          >
+            <div className="flex flex-col space-y-1.5 p-6">
+              <h3 className="whitespace-nowrap text-2xl font-semibold leading-none tracking-tight">
+                Year
               </h3>
             </div>
             <div className="p-6">
