@@ -16,7 +16,7 @@ export default async function Page({
     return (
 
         <section className=" bg-white relative py-20 md:mx-20 mx-4">
-      <h2 className="my-2 text-xl font-semibold text-gray-800">Choose your Institute's city:</h2>
+      <h2 className="my-2 text-xl font-semibold text-gray-800">Choose your Institute&apos;s city:</h2>
       <section className="grid grid-cols-2 sm:grid-cols-4  md:grid-cols-8 gap-4">
 
         {cityNames.map((cityName, index) => (
