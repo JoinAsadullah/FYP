@@ -1,5 +1,8 @@
 import data from '@/components/data'
 import Link from 'next/link'
+import { neon } from "@neondatabase/serverless"
+
+const sql = neon(process.env.DATABASE_URL || '');
 
 type Student = {
   sr: number
@@ -46,7 +49,7 @@ const students: Student[] = [
 export default async function Page({
     params,
   }: {
-    params: Promise<{ letter: string, city: string, university: string, campus: string, department: string, degree: string }>
+    params: Promise<{ letter: string, city: string, university: string, campus: string, department: string, degree: string, year: string }>
   }) {
     const letter = (await params).letter
     const city = (await params).city.unslugify()
@@ -54,16 +57,35 @@ export default async function Page({
     const campus = (await params).campus.unslugify()
     const department = (await params).department.unslugify()
     const degree = (await params).degree.unslugify()
+    const year = (await params).year.unslugify()
 
 
-    const departments = data
+    const departmentValue = data
     .filter(data => data.City_name === city)
     .flatMap(data => data.Universities.filter(data => data.University === university))
     .flatMap(data => data.Campuses.filter(data => data.Campus === campus))
-    .flatMap(data => data.Departments.map(uni => uni.Department));
+    .flatMap(data => data.Departments.filter(data => data.Department === department))
+    .flatMap(data => data.Department_value).toString();
 
+    const studentsData = await sql`
+    SELECT 
+    "sr_no", 
+    "uid", 
+    "name", 
+    "father_name", 
+    "roll_no", 
+    "program", 
+    "year_of_study", 
+    "semester", 
+    "cgpa", 
+    "percentage"
+FROM students
+WHERE "department_value" = ${departmentValue}
+  AND "degree" = ${degree}
+  AND "year" = ${year}
 
-
+    `
+    console.log(studentsData)
     return (
 
         <section className=" bg-white relative py-20 md:mx-20 mx-4">
@@ -85,17 +107,17 @@ export default async function Page({
             </tr>
           </thead>
           <tbody>
-            {students.map((student, index) => (
+            {studentsData.map((student, index) => (
               <tr key={student.uid} className={`${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'} border-b hover:bg-gray-100`}>
-                <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{student.sr}</td>
+                <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{student.sr_no}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{student.uid}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{student.name}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{student.fatherName}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{student.rollNo}</td>
+                <td className="px-6 py-4 whitespace-nowrap">{student.father_name}</td>
+                <td className="px-6 py-4 whitespace-nowrap">{student.roll_no}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{student.program}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{student.yearOfStudy}</td>
+                <td className="px-6 py-4 whitespace-nowrap">{student.year_of_study}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{student.semester}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{student.cgpa.toFixed(2)}</td>
+                <td className="px-6 py-4 whitespace-nowrap">{student.cgpa}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{student.percentage}%</td>
               </tr>
             ))}
