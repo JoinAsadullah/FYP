@@ -12,7 +12,7 @@ export default function Page() {
       campus: "Main Campus",
       department: "Computing",
       probability: 90,
-      avatar: "/placeholder.svg?height=96&width=96"
+      avatar: "/images/avatar.jpg"
     }
 
     const getAwardSuggestion = (probability: number) => {
@@ -38,7 +38,7 @@ export default function Page() {
       <div className="min-h-screen bg-gray-50 py-12">
         
         <div className="max-w-3xl mx-auto p-6">
-      <div className="bg-white rounded-lg shadow-lg p-6 space-y-6">
+      <div className="bg-gray-200 rounded-lg shadow-lg p-6 space-y-6">
         {/* Header Section with Avatar and Basic Info */}
         <div className="flex items-start gap-6">
           <div className="relative w-24 h-24 rounded-lg overflow-hidden bg-orange-200 flex-shrink-0">
