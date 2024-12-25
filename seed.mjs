@@ -71,14 +71,15 @@ async function main() {
     Sr_No, UID, City, City_value, University, University_value, 
     Campus, Campus_value, Department, Department_value, Degree, 
     Year, Name, Father_Name, Roll_No, Program, Year_of_Study, 
-    Semester, CGPA, Percentage, Status, Merit_Status
+    Semester, CGPA, Percentage, Status, Merit_Status, Prediction, Probability, Suggestions
   ) VALUES (
     ${student.Sr_No}, ${student.UID}, ${student.City}, ${student.City_value}, 
     ${student.University}, ${student.University_value}, ${student.Campus}, 
     ${student.Campus_value}, ${student.Department}, ${student.Department_value}, 
     ${student.Degree}, ${student.Year}, ${student.Name}, ${student.Father_Name}, 
     ${student.Roll_No}, ${student.Program}, ${student.Year_of_Study}, ${student.Semester}, 
-    ${student.CGPA}, ${student.Percentage}, ${student.Status}, ${student.Merit_Status}
+    ${student.CGPA}, ${student.Percentage}, ${student.Status}, ${student.Merit_Status},
+    ${student.Prediction}, ${student.Probability}, ${student.Suggestions}
   );
   `;
   });

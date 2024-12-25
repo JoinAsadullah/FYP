@@ -1,7 +1,14 @@
 import Image from 'next/image'
+import { neon } from "@neondatabase/serverless"
+
+const sql = neon(process.env.DATABASE_URL || '');
 
 
 export default function Page() {
+
+  
+
+
     const student = {
       uid: "ST123456",
       name: "John Doe",
@@ -47,7 +54,7 @@ export default function Page() {
                 src={student.avatar}
                 alt="Student avatar"
                 fill
-                className="object-cover"
+                className="object-cover opacity-30"
               />
             ) : (
               <div className="w-full h-full flex items-center justify-center text-4xl">
