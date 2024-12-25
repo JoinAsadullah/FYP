@@ -8,9 +8,9 @@ export default async function Page({
     params: Promise<{ letter: string, city: string, university: string, campus: string }>
   }) {
     const letter = (await params).letter
-    const city = (await params).city.replaceAll("-", " ")
-    const university = (await params).university.replaceAll("-", " ")
-    const campus = (await params).campus.replaceAll("-", " ")
+    const city = (await params).city.unslugify()
+    const university = (await params).university.unslugify()
+    const campus = (await params).campus.unslugify()
 
     const departments = data
     .filter(data => data.City_name === city)
@@ -28,7 +28,7 @@ export default async function Page({
           <Link
             className="rounded-lg border text-card-foreground shadow-sm bg-gray-200"
             data-v0-t="card"
-            href={`/${letter}/${city.replaceAll(" ", "-")}/${university.replaceAll(" ", "-")}/${campus.replaceAll(" ", "-")}/${department.replaceAll(" ", "-")}`}
+            href={`/${letter}/${city.slugify()}/${university.slugify()}/${campus.slugify()}/${department.slugify()}`}
             key={department}
           >
             <div className="flex flex-col space-y-1.5 p-6">
@@ -42,3 +42,28 @@ export default async function Page({
     </section>
     )
   }
+
+  
+  declare global {
+    interface String {
+      slugify(): string;
+      unslugify(): string;
+    }
+  }
+// Add slugify method to String prototype
+String.prototype.slugify = function () {
+  return this.replaceAll(' ', '-')    // Replace all spaces with hyphens
+             .replaceAll('&', '_and_')  // Replace all '&' with 'and'
+             .replaceAll('/', '_or_') // Replace all '/' with 'or'
+             .replaceAll(',', '_comma_')
+             .replaceAll('.', '_dot_')
+};
+
+// Add unslugify method to String prototype
+String.prototype.unslugify = function () {
+  return this.replaceAll('-', ' ')    // Replace all hyphens with spaces
+             .replaceAll('_and_', '&')  // Replace all 'and' with '&'
+             .replaceAll('_or_', '/')  // Replace all 'or' with '/'
+             .replaceAll('_comma_' , ",")
+             .replaceAll('_dot_' , ".")
+};
