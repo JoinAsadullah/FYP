@@ -85,7 +85,7 @@ WHERE "department_value" = ${departmentValue}
   AND "year" = ${year}
 
     `
-    console.log(studentsData)
+
     return (
 
         <section className=" bg-white relative py-20 md:mx-20 mx-4">
@@ -94,32 +94,36 @@ WHERE "department_value" = ${departmentValue}
         <table className="w-full text-sm text-left text-gray-500">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50">
             <tr>
-              <th scope="col" className="px-6 py-3 w-[50px]">Sr</th>
-              <th scope="col" className="px-6 py-3">UID</th>
-              <th scope="col" className="px-6 py-3">Name</th>
-              <th scope="col" className="px-6 py-3">Father Name</th>
-              <th scope="col" className="px-6 py-3">Roll No</th>
-              <th scope="col" className="px-6 py-3">Program</th>
-              <th scope="col" className="px-6 py-3">Year of Study</th>
-              <th scope="col" className="px-6 py-3">Semester</th>
-              <th scope="col" className="px-6 py-3">CGPA</th>
-              <th scope="col" className="px-6 py-3">Percentage</th>
+              <th scope="col" className="px-2 py-3 w-[50px]">Sr</th>
+              <th scope="col" className="px-2 py-3">UID</th>
+              <th scope="col" className="px-2 py-3">Name</th>
+              <th scope="col" className="px-2 py-3">Father Name</th>
+              <th scope="col" className="px-2 py-3">Roll No</th>
+              <th scope="col" className="px-2 py-3">Program</th>
+              <th scope="col" className="px-2 py-3">Year of Study</th>
+              <th scope="col" className="px-2 py-3">Semester</th>
+              <th scope="col" className="px-2 py-3">CGPA</th>
+              <th scope="col" className="px-2 py-3">Percentage</th>
             </tr>
           </thead>
           <tbody>
             {studentsData.map((student, index) => (
-              <tr key={student.uid} className={`${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'} border-b hover:bg-gray-100`}>
-                <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{student.sr_no}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{student.uid}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{student.name}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{student.father_name}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{student.roll_no}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{student.program}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{student.year_of_study}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{student.semester}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{student.cgpa}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{student.percentage}%</td>
-              </tr>
+              
+              <tr key={student.uid} className={`${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'} border-b hover:bg-gray-100 cursor-pointer`}>
+
+                <td className="px-2 py-4 font-medium text-gray-900 whitespace-nowrap"><Link href={`/uid/${student.uid}`}>{student.sr_no}</Link></td>
+                <td className="px-2 py-4 whitespace-nowrap"><Link href={`/uid/${student.uid}`}>{student.uid}</Link></td>
+                <td className="px-2 py-4 whitespace-nowrap"><Link href={`/uid/${student.uid}`}>{student.name}</Link></td>
+                <td className="px-2 py-4 whitespace-nowrap"><Link href={`/uid/${student.uid}`}>{student.father_name}</Link></td>
+                <td className="px-2 py-4 whitespace-nowrap"><Link href={`/uid/${student.uid}`}>{student.roll_no}</Link></td>
+                <td className="px-2 py-4 whitespace-nowrap"><Link href={`/uid/${student.uid}`}>{student.program}</Link></td>
+                <td className="px-2 py-4 whitespace-nowrap"><Link href={`/uid/${student.uid}`}>{student.year_of_study}</Link></td>
+                <td className="px-2 py-4 whitespace-nowrap"><Link href={`/uid/${student.uid}`}>{student.semester}</Link></td>
+                <td className="px-2 py-4 whitespace-nowrap"><Link href={`/uid/${student.uid}`}>{student.cgpa}</Link></td>
+                <td className="px-2 py-4 whitespace-nowrap"><Link href={`/uid/${student.uid}`}>{student.percentage}%</Link></td>
+
+              </tr> 
+              
             ))}
           </tbody>
         </table>

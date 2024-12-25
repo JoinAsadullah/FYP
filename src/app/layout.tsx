@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Image from "next/image";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,11 +21,13 @@ export default function RootLayout({
       <body className={inter.className}>
         <main className=" h-svh">
           <section className="bg-gray-100 h-20 flex justify-between items-center">
+            <Link href="/">
             <div className=" ml-4 flex justify-between items-center">
               <h1 className="font-extralight text-3xl text-green-600 text-outline">QAS</h1>
               <h1 className="font-black text-gray-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
               <Image src="/images/pmylogo.png" alt="pmy logo" width={150} height={100} />
             </div>
+            </Link>
             <div className="w-12 h-6">
               <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6">
                 <path
