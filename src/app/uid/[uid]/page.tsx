@@ -15,8 +15,11 @@ export default async function ({
 FROM students
 WHERE "uid" = ${uid}
 `
-console.log(studentsData[0].name)
-
+   if(studentsData.length === 0) {
+    return(
+      <h1>No data is found.</h1>
+    )
+   }
 
     const student = {
       uid: uid,
