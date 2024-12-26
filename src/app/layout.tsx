@@ -23,6 +23,8 @@ export default function RootLayout({
     e.preventDefault()
     if (/^[a-zA-Z0-9]{7}$/.test(searchTerm)) {
       router.push(`/uid/${searchTerm}`);
+      setSearchTerm("")
+
     } else {
       alert('Please enter a valid 7-digit alphanumeric UID.');
     }
@@ -32,6 +34,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <main className=" h-svh">
+
+          <div className="fixed top-0 w-full bg-gray-200 z-50 ">
           <section className="bg-gray-100 h-20 flex justify-between items-center">
             <Link href="/">
             <div className=" ml-4 flex justify-between items-center">
@@ -83,11 +87,12 @@ export default function RootLayout({
           Search
         </button>
       </form>
-    </div>
-
+    </div></div>
+<div className="mt-[120px]">
           {children}
+          </div>
         <div>
-          <footer className=" bottom-0 w-full bg-gray-100 py-2 flex justify-center items-center">
+          <footer className="fixed bottom-0 w-full bg-gray-200 py-2 flex justify-center items-center">
             <p className="text-gray-500 text-center text-sm">© 2025 QAS. All rights reserved.<br/>Made with 💚 by Qaisar, Asadullah and Soban</p>
           </footer>
         </div>
