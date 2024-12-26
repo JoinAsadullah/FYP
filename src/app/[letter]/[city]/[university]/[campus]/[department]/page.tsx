@@ -63,7 +63,7 @@ export default async function Page({
   
 // Add slugify method to String prototype
 String.prototype.slugify = function () {
-  return this.replaceAll(' ', '-')    // Replace all spaces with hyphens
+  return this.replaceAll(' ', '_-_')    // Replace all spaces with hyphens
              .replaceAll('&', '_and_')  // Replace all '&' with 'and'
              .replaceAll('/', '_or_') // Replace all '/' with 'or'
              .replaceAll(',', '_comma_')
@@ -72,7 +72,7 @@ String.prototype.slugify = function () {
 
 // Add unslugify method to String prototype
 String.prototype.unslugify = function () {
-  return this.replaceAll('-', ' ')    // Replace all hyphens with spaces
+  return this.replaceAll('_-_', ' ')    // Replace all hyphens with spaces
              .replaceAll('_and_', '&')  // Replace all 'and' with '&'
              .replaceAll('_or_', '/')  // Replace all 'or' with '/'
              .replaceAll('_comma_' , ",")
