@@ -32,7 +32,7 @@ WHERE "uid" = ${uid}
       department: studentsData[0].department,
       probability: studentsData[0].probability.replace('%', ''),
       sugestions: studentsData[0].suggestions,
-      status: studentsData[0].status,
+      status: studentsData[0].prediction,
       avatar: "/images/avatar.jpg"
     }
 
@@ -50,7 +50,7 @@ WHERE "uid" = ${uid}
       <div className="min-h-screen bg-gray-50 py-12">
         
         <div className="max-w-3xl mx-auto p-6">
-      <div className="bg-gray-200 rounded-lg shadow-lg p-6 space-y-6">
+      <div className="bg-gray-100 rounded-lg shadow-lg p-6 space-y-6">
         {/* Header Section with Avatar and Basic Info */}
         <div className="flex items-start gap-6">
           <div className="relative w-24 h-24 rounded-lg overflow-hidden bg-orange-200 flex-shrink-0">
@@ -74,7 +74,7 @@ WHERE "uid" = ${uid}
                 <div className="text-sm text-gray-500">UID:</div>
                 <div className="font-medium">{student.uid}</div>
               </div>
-              <div>
+              <div className="max-md:col-span-2">
                 <div className="text-sm text-gray-500">Name:</div>
                 <div className="font-medium">{student.name}</div>
               </div>
@@ -87,11 +87,11 @@ WHERE "uid" = ${uid}
         </div>
 
         {/* Main Info Grid */}
-        <div className="grid grid-cols-3 gap-6">
+        <div className="grid max-md:grid-cols-2 grid-cols-3 gap-6">
           <div className="space-y-4">
             <div>
               <div className="text-sm text-gray-500">Campus:</div>
-              <div className="font-medium">{student.campus}</div>
+              <div className="font-medium text-wrap">{student.campus}</div>
             </div>
             <div>
               <div className="text-sm text-gray-500">Dept:</div>

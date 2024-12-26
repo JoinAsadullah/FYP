@@ -82,13 +82,12 @@ export default async function Page({
 FROM students
 WHERE "department_value" = ${departmentValue}
   AND "degree" = ${degree}
-  AND "year" = ${year}
+  AND "year" = ${year} `
 
-    `
 
     return (
 
-        <section className=" bg-white relative py-20 md:mx-20 mx-4">
+        <section className=" bg-white relative py-20 md:mx-20 mx-4 overflow-x-scroll">
       <h2 className="my-2 text-xl font-semibold text-gray-800">List of students</h2>
 
         <table className="w-full text-sm text-left text-gray-500">

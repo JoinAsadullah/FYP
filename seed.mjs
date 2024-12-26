@@ -62,35 +62,49 @@ async function main() {
 //   `;
 //   console.log('Created "students" table');
 
-  const studentsData = await parseCSV();
 
-  const promises = studentsData.map((student, index) => {
 
-    return sql`
-  INSERT INTO students (
-    Sr_No, UID, City, City_value, University, University_value, 
-    Campus, Campus_value, Department, Department_value, Degree, 
-    Year, Name, Father_Name, Roll_No, Program, Year_of_Study, 
-    Semester, CGPA, Percentage, Status, Merit_Status, Prediction, Probability, Suggestions
-  ) VALUES (
-    ${student.Sr_No}, ${student.UID}, ${student.City}, ${student.City_value}, 
-    ${student.University}, ${student.University_value}, ${student.Campus}, 
-    ${student.Campus_value}, ${student.Department}, ${student.Department_value}, 
-    ${student.Degree}, ${student.Year}, ${student.Name}, ${student.Father_Name}, 
-    ${student.Roll_No}, ${student.Program}, ${student.Year_of_Study}, ${student.Semester}, 
-    ${student.CGPA}, ${student.Percentage}, ${student.Status}, ${student.Merit_Status},
-    ${student.Prediction}, ${student.Probability}, ${student.Suggestions}
-  );
-  `;
-  });
+const BATCH_SIZE = 500; // Adjust batch size based on your system's capacity
 
-  const results = await Promise.all(promises);
-  console.log(`Seeded ${results.length} students`);
+const studentsData = await parseCSV();
 
-  return {
-    seededBooks: results.length,
-  };
+  console.log(`Total students to seed: ${studentsData.length}`);
+
+  for (let i = 0; i < studentsData.length; i += BATCH_SIZE) {
+    const batch = studentsData.slice(i, i + BATCH_SIZE);
+
+    // Insert the batch into the database
+    const promises = batch.map((student) =>
+      sql`
+      INSERT INTO students (
+        Sr_No, UID, City, City_value, University, University_value, 
+        Campus, Campus_value, Department, Department_value, Degree, 
+        Year, Name, Father_Name, Roll_No, Program, Year_of_Study, 
+        Semester, CGPA, Percentage, Status, Merit_Status, Prediction, Probability, Suggestions
+      ) VALUES (
+        ${student.Sr_No}, ${student.UID}, ${student.City}, ${student.City_value}, 
+        ${student.University}, ${student.University_value}, ${student.Campus}, 
+        ${student.Campus_value}, ${student.Department}, ${student.Department_value}, 
+        ${student.Degree}, ${student.Year}, ${student.Name}, ${student.Father_Name}, 
+        ${student.Roll_No}, ${student.Program}, ${student.Year_of_Study}, ${student.Semester}, 
+        ${student.CGPA}, ${student.Percentage}, ${student.Status}, ${student.Merit_Status},
+        ${student.Prediction}, ${student.Probability}, ${student.Suggestions}
+      );
+      `
+    );
+
+    try {
+      const results = await Promise.all(promises);
+      console.log(`Seeded ${results.length} students in batch ${Math.ceil(i / BATCH_SIZE) + 1}`);
+    } catch (error) {
+      console.error(`Error seeding batch starting at index ${i}:`, error);
+    }
+  }
+
+  console.log("Seeding completed!");
 }
+
+
 
 
 // Call the async main function

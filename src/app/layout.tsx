@@ -62,14 +62,19 @@ export default function RootLayout({
             </div>
           </section>
 
-          <div className="max-w-xl mx-auto p-4">
-      <form onSubmit={handleSearch} className="flex items-center">
+          <div className="max-w-md mx-auto p-4">
+      <form onSubmit={handleSearch} className="flex items-center ">
         <input
           type="text"
           placeholder="Search UID..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="flex-grow px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+              handleSearch(e);
+            }}}
+          className="w-[50%] flex-grow px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         />
         <button
           type="submit"
@@ -81,6 +86,11 @@ export default function RootLayout({
     </div>
 
           {children}
+        <div>
+          <footer className="fixed bottom-0 w-full bg-gray-100 py-2 flex justify-center items-center">
+            <p className="text-gray-500 text-center text-sm">© 2025 QAS. All rights reserved.<br/>Made with 💚 by Qaisar, Asadullah and Soban</p>
+          </footer>
+        </div>
         </main>
       </body>
     </html>

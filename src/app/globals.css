@@ -6,6 +6,7 @@
 
 body {
   background: white;
+  color: rgb(44, 44, 44);
 }
 
 @layer utilities {

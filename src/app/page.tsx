@@ -22,7 +22,7 @@ export default function Home() {
             key={letter}
           >
             <div className="flex flex-col space-y-1.5 p-6">
-              <h3 className="text-left whitespace-wrap text-2xl font-semibold leading-none tracking-tight">
+              <h3 className="text-left text-gray-700 whitespace-wrap text-2xl font-semibold leading-none tracking-tight">
                 {letter}
               </h3>
             </div>
