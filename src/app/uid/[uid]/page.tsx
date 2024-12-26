@@ -4,41 +4,43 @@ import { neon } from "@neondatabase/serverless"
 const sql = neon(process.env.DATABASE_URL || '');
 
 
-export default function Page() {
-
-  
+export default async function ({
+  params,
+}: {
+  params: Promise<{ uid: string }>
+}) {
+  const uid = (await params).uid
+  const studentsData = await sql`
+  SELECT *
+FROM students
+WHERE "uid" = ${uid}
+`
+console.log(studentsData[0].name)
 
 
     const student = {
-      uid: "ST123456",
-      name: "John Doe",
-      university: "Example University",
-      program: "Computer Science",
-      year: 3,
-      cgpa: 3.75,
-      campus: "Main Campus",
-      department: "Computing",
-      probability: 90,
+      uid: uid,
+      name: studentsData[0].name,
+      university: studentsData[0].university,
+      program: studentsData[0].program,
+      year: studentsData[0].year,
+      cgpa: studentsData[0].cgpa,
+      campus: studentsData[0].campus,
+      department: studentsData[0].department,
+      probability: studentsData[0].probability.replace('%', ''),
+      sugestions: studentsData[0].sugestions,
+      status: studentsData[0].status,
       avatar: "/images/avatar.jpg"
     }
 
-    const getAwardSuggestion = (probability: number) => {
-        if (probability >= 90) return "You're probable to achieve the Laptop Award."
-        if (probability >= 70) return "You have a good chance for the Laptop Award."
-        return "Keep improving to qualify for the Laptop Award."
-      }
+
     
       const getStatusColor = (cgpa: number) => {
         if (cgpa >= 3.5) return 'text-green-600'
         if (cgpa >= 3.0) return 'text-blue-600'
         return 'text-yellow-600'
       }
-    
-      const getStatus = (cgpa: number) => {
-        if (cgpa >= 3.5) return 'Excellent'
-        if (cgpa >= 3.0) return 'Good'
-        return 'Average'
-      }
+
 
   
     return (
@@ -108,12 +110,12 @@ export default function Page() {
           <div className="space-y-4">
             <div>
               <div className="text-sm text-gray-500">CGPA:</div>
-              <div className="font-medium">{student.cgpa.toFixed(2)}</div>
+              <div className="font-medium">{student.cgpa}</div>
             </div>
             <div>
               <div className="text-sm text-gray-500">Status:</div>
               <div className={`font-medium ${getStatusColor(student.cgpa)}`}>
-                {getStatus(student.cgpa)}
+                {student.status}
               </div>
             </div>
           </div>
@@ -137,7 +139,7 @@ export default function Page() {
           <div>
             <div className="text-sm text-gray-500">Suggestion:</div>
             <div className="font-medium text-gray-900 mt-1">
-              {getAwardSuggestion(student.probability)}
+              {student.sugestions}
             </div>
           </div>
         </div>
