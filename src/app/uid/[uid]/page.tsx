@@ -28,7 +28,7 @@ console.log(studentsData[0].name)
       campus: studentsData[0].campus,
       department: studentsData[0].department,
       probability: studentsData[0].probability.replace('%', ''),
-      sugestions: studentsData[0].sugestions,
+      sugestions: studentsData[0].suggestions,
       status: studentsData[0].status,
       avatar: "/images/avatar.jpg"
     }
