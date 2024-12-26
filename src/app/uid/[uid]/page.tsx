@@ -47,7 +47,7 @@ WHERE "uid" = ${uid}
 
   
     return (
-      <div className="min-h-screen bg-gray-50 py-12">
+      <div className="min-h-screen bg-gray-50 py-8 pb-20">
         
         <div className="max-w-3xl mx-auto p-6">
       <div className="bg-gray-100 rounded-lg shadow-lg p-6 space-y-6">
@@ -115,20 +115,20 @@ WHERE "uid" = ${uid}
               <div className="text-sm text-gray-500">CGPA:</div>
               <div className="font-medium">{student.cgpa}</div>
             </div>
-            <div>
+
+          </div>            <div>
               <div className="text-sm text-gray-500">Status:</div>
               <div className={`font-medium ${getStatusColor(student.cgpa)}`}>
                 {student.status}
               </div>
             </div>
-          </div>
         </div>
 
         {/* Probability and Suggestion Section */}
         <div className="space-y-4 pt-4 border-t border-gray-100">
           <div>
             <div className="text-sm text-gray-500">Probability:</div>
-            <div className="relative w-full h-2 bg-gray-100 rounded-full mt-2">
+            <div className="relative w-full h-2 bg-white rounded-full mt-2">
               <div 
                 className="absolute left-0 top-0 h-full bg-blue-600 rounded-full transition-all duration-500 ease-out"
                 style={{ width: `${student.probability}%` }}

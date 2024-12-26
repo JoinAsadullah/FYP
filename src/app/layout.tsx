@@ -87,7 +87,7 @@ export default function RootLayout({
 
           {children}
         <div>
-          <footer className="fixed bottom-0 w-full bg-gray-100 py-2 flex justify-center items-center">
+          <footer className=" bottom-0 w-full bg-gray-100 py-2 flex justify-center items-center">
             <p className="text-gray-500 text-center text-sm">© 2025 QAS. All rights reserved.<br/>Made with 💚 by Qaisar, Asadullah and Soban</p>
           </footer>
         </div>
