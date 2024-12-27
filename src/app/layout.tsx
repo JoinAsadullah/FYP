@@ -8,6 +8,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from 'next/navigation';
 import { Analytics } from "@vercel/analytics/react"
+import { useEffect } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,6 +22,27 @@ export default function RootLayout({
   const router = useRouter()
 
   const handleSearch = (e: React.FormEvent) => {
+
+    useEffect(() => {
+      // Load the Google Tag Manager script
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = 'https://www.googletagmanager.com/gtag/js?id=G-NFBWBNWFKR';
+      document.head.appendChild(script);
+  
+      // Initialize the gtag function and configuration
+      const initGtag = () => {
+        (window as any).dataLayer = (window as any).dataLayer || [];
+        function gtag(...args: any[]) {
+          (window as any).dataLayer.push(args);
+        }
+        gtag('js', new Date());
+        gtag('config', 'G-NFBWBNWFKR');
+      };
+  
+      script.onload = initGtag;
+    }, []);
+
     e.preventDefault()
     if (/^[a-zA-Z0-9]{7}$/.test(searchTerm)) {
       router.push(`/uid/${searchTerm}`);
@@ -30,6 +52,8 @@ export default function RootLayout({
       alert('Please enter a valid 7-digit alphanumeric UID.');
     }
   }
+
+
 
   return (
     <html lang="en">
