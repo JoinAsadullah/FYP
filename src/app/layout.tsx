@@ -6,7 +6,8 @@ import "./globals.css";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation';
+import { Analytics } from "@vercel/analytics/react"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,6 +33,8 @@ export default function RootLayout({
 
   return (
     <html lang="en">
+      
+      <Analytics/>
       <body className={inter.className}>
         <main className=" h-svh">
 
