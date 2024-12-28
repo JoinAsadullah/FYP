@@ -39,6 +39,7 @@ export default function RootLayout({
     };
 
     script.onload = initGtag;
+
   }, []);
 
   const handleSearch = (e: React.FormEvent) => {

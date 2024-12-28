@@ -82,16 +82,14 @@ export default async function Page({
 FROM students
 WHERE "department_value" = ${departmentValue}
   AND "degree" = ${degree}
-  AND "year" = ${year} `
-
-
+  AND ("year" = ${year} OR "year" = ${year=="5" ? "-1" : ""}) ;`
     return (
 
         <section className=" bg-white relative py-20 md:mx-20 mx-4 overflow-x-scroll">
       <h2 className="my-2 text-xl font-semibold text-gray-800">List of students</h2>
-
-        <table className="w-full text-sm text-left text-gray-500">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50">
+      <div className=" rounded-lg">
+        <table className="w-full text-sm text-left bg-white text-gray-500 shadow-md rounded-lg">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-100 ">
             <tr>
               <th scope="col" className="px-2 py-3 w-[50px]">Sr</th>
               <th scope="col" className="px-2 py-3">UID</th>
@@ -126,6 +124,7 @@ WHERE "department_value" = ${departmentValue}
             ))}
           </tbody>
         </table>
+      </div>
 
 
 

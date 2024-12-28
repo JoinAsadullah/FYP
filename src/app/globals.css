@@ -15,11 +15,12 @@ body {
   }
 }
 
-body::-webkit-scrollbar {
-  display: none;
+html, body {
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
 }
-/* Hide scrollbar for IE, Edge and Firefox */
-body {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+
+html::-webkit-scrollbar, 
+body::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Edge */
 }

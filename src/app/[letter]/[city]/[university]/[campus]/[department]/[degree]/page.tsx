@@ -31,11 +31,10 @@ export default async function Page({
           >
             <div className="flex flex-col space-y-1.5 p-6">
               <h3 className="text-left whitespace-wrap text-sm font-semibold leading-none tracking-tight">
-                {index+1}
+                {index+1 + (index==4 ? " / Passed out" : " Year")}
               </h3>
             </div>
           </Link>
-
       ))}
       </section>
     </section>
