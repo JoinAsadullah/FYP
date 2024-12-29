@@ -10,7 +10,6 @@ import StudentsTable from '@/components/StudentsTable'
 const sql = neon(process.env.DATABASE_URL || '');
 
 
-
 export default async function Page({
   params,
 }: {

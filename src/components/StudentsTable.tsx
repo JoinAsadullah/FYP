@@ -22,35 +22,10 @@ type Student = {
     percentage: number
   }
   
-  const students: Student[] = [
-    {
-      uid: "STU001",
-      name: "John Doe",
-      father_name: "Michael Doe",
-      roll_no: "R001",
-      program: "Computer Science",
-      year_of_study: 2,
-      semester: 3,
-      cgpa: 3.7,
-      percentage: 85
-    },
-    {
-      uid: "STU002",
-      name: "Jane Smith",
-      father_name: "Robert Smith",
-      roll_no: "R002",
-      program: "Electrical Engineering",
-      year_of_study: 3,
-      semester: 5,
-      cgpa: 3.9,
-      percentage: 92
-    },
-    // Add more sample data as needed
-  ]
 
 
 
-export default function StudentsTable({ studentsData }: { studentsData: Student[] }) {
+export default function StudentsTable({ studentsData }: any) {
     const router = useRouter();
     const [search, setSearch] = useState('');
 
@@ -99,10 +74,10 @@ export default function StudentsTable({ studentsData }: { studentsData: Student[
                     </thead>
                     <tbody>
                         {studentsData
-                          .filter(student =>
-                            student.name.toLowerCase().includes(search.toLowerCase())
+                          .filter((student:Student) =>{
+                            student.name.toLowerCase().includes(search.toLowerCase())}
                           )
-                        .map((student, index) => (
+                        .map((student:Student, index: number) => (
                             <tr onClick={handleRowClick} id={student.uid} key={student.uid} className={`${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'} border-b h-10 hover:bg-gray-100 cursor-pointer`}>
                                 <td className="px-2 py-4 font-medium text-gray-900 whitespace-nowrap">{index + 1}</td>
                                 <td className="px-2 py-4 whitespace-nowrap"><p className='inline'>{student.uid}</p> <CopyIcon text={student.uid}/></td>
