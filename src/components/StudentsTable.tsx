@@ -27,7 +27,7 @@ type Student = {
 
 export default function StudentsTable({ studentsData }: any) {
     const router = useRouter();
-    const [search, setSearch] = useState('');
+    const [search, setSearch] = useState("");
 
     const handleRowClick = (e: React.MouseEvent<HTMLTableRowElement>) => {
         const uid = e.currentTarget.getAttribute("id");
@@ -75,7 +75,9 @@ export default function StudentsTable({ studentsData }: any) {
                     <tbody>
                         {studentsData
                           .filter((student:Student) =>{
-                            student.name.toLowerCase().includes(search.toLowerCase())}
+                            if(search === "") return student;
+                            return(
+                            student.name.toLowerCase().includes(search.toLowerCase()))}
                           )
                         .map((student:Student, index: number) => (
                             <tr onClick={handleRowClick} id={student.uid} key={student.uid} className={`${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'} border-b h-10 hover:bg-gray-100 cursor-pointer`}>
