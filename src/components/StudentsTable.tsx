@@ -45,7 +45,7 @@ export default function StudentsTable({ studentsData }: any) {
 
 
                 <h2 className="text-xl font-semibold text-gray-800">List of students</h2>
-                <p className='text-gray-500 text-[12px]'>(Click record to view prediction)</p>
+                <p className='text-green-500 text-[14px]'>(Click on Your Row to view Details and Prediction.)</p>
                 <div className="h-10 mt-4">
                 <input
         type="text"
