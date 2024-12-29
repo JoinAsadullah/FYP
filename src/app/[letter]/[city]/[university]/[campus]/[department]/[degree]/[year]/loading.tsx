@@ -5,7 +5,7 @@ export default function TableSkeleton() {
   const skeletonRows = Array.from({ length: 5 }, (_, i) => i)
 
   return (
-    <div className="container mx-auto py-10 px-4">
+    <div className="container py-20 md:mx-20 mx-4">
       {/* Skeleton for the title */}
       <div className="h-8 w-48 bg-gray-200 rounded mb-4 animate-pulse" />
       

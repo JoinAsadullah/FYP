@@ -1,7 +1,7 @@
 export default function StudentDashboardSkeleton() {
     return (
-      <div className="max-w-3xl mx-auto p-6">
-        <div className="bg-white rounded-lg shadow-lg p-6 space-y-6">
+      <div className="max-w-3xl mx-auto p-6 mt-[150px]">
+        <div className="bg-gray-100 rounded-lg shadow-lg p-6 space-y-6">
           {/* Header Section with Avatar and Basic Info */}
           <div className="flex items-start gap-6">
             <div className="relative w-24 h-24 rounded-lg overflow-hidden bg-gray-200 animate-pulse flex-shrink-0" />
