@@ -27,7 +27,7 @@ export default function RootLayout({
   const handleSearch = (e: React.FormEvent) => {
     
     e.preventDefault()
-    if (/^[a-zA-Z0-9]{7}$/.test(searchTerm)) {
+    if (/^[a-zA-Z0-9]{7}$/.test(searchTerm.replace(" ", ""))) {
       router.push(`/uid/${searchTerm}`);
       setSearchTerm("")
 
@@ -40,7 +40,6 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      
       <Analytics/>
       <body className={inter.className}>
         <main className=" h-svh">

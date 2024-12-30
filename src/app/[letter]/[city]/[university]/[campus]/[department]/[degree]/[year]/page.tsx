@@ -1,9 +1,5 @@
 import data from '@/components/data'
-import Link from 'next/link'
 import { neon } from "@neondatabase/serverless"
-import TableLink from '@/components/TableLink'
-import copy from 'clipboard-copy'
-import CopyIcon from '@/components/CopyIcon'
 import StudentsTable from '@/components/StudentsTable'
 
 
@@ -31,6 +27,10 @@ export default async function Page({
     .flatMap(data => data.Departments.filter(data => data.Department === department))
     .flatMap(data => data.Department_value).toString();
 
+  const validatedDegree =   degree.replace(/\D/g, '')
+  const validatedYear = year.replace(/\D/g, '')
+  const validatedDepartmentValue = departmentValue.replace(/\D/g, '')
+  
   const studentsData = await sql`
     SELECT 
     "uid", 
@@ -43,9 +43,9 @@ export default async function Page({
     "cgpa", 
     "percentage"
 FROM students
-WHERE "department_value" = ${departmentValue}
-  AND "degree" = ${degree}
-  AND ("year" = ${year} OR "year" = ${year == "5" ? "-1" : ""}) ;`
+WHERE "department_value" = ${validatedDepartmentValue}
+  AND "degree" = ${validatedDegree}
+  AND ("year" = ${validatedYear} OR "year" = ${year == "5" ? "-1" : ""}) ;`
 
   return (
     <StudentsTable studentsData={studentsData} />

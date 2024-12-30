@@ -1,4 +1,3 @@
-import data from '@/components/data'
 import Link from 'next/link'
 
 

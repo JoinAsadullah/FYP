@@ -11,7 +11,7 @@ export default function CopyIcon ({ text }: CopyIconProps){
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
 
       e.stopPropagation();
-      copy(e.currentTarget.textContent?.replaceAll(" ", "") || '');
+      copy(text.replaceAll(" ", "") || '');
     setIsCopied(true);
   };
 

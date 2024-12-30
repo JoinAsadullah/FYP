@@ -1,5 +1,3 @@
-import React from 'react'
-
 export default function TableSkeleton() {
   // Create an array of 5 items for skeleton rows
   const skeletonRows = Array.from({ length: 5 }, (_, i) => i)
