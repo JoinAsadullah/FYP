@@ -134,7 +134,7 @@ WHERE "uid" = ${/^[a-zA-Z0-9]{7}$/.test(uid.replace(" ", ""))? uid : ""};
                 style={{ width:`${student.probability}%` }}
               >
                               <div 
-                className=" absolute left-0 top-0 h-full bg-gradient-to-r from-[#ff3434] via-[#F5C900] to-[#008241]  rounded-full transition-all duration-500 ease-out"
+                className=" absolute left-0 top-0 h-full bg-gradient-to-r from-[#f9dac8] to-[#62befe]  rounded-full transition-all duration-500 ease-out"
                 style={{ width:`${100*(100/student.probability)}%` }}
               />
               </div>

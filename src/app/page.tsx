@@ -3,8 +3,8 @@ import Link from 'next/link'
 
 
 export const metadata: Metadata = {
-  title: "QAS - Prediction for PMYP",
-  description: "Quantification and Analysis System (QAS) for Prediction of Prime Minister Youth Program Laptop Scheme. This system is designed to predict the probability of students for PMYP Laptop Scheme."
+  title: "QAS - Laptop award Prediction for PMYP",
+  description: "Quantification and Analysis System (QAS) for Prediction of Prime Minister Youth Program Laptop Scheme. This system is designed to predict the probability of students getting the PMYP Laptop Award."
 };
 export default function Home() {
 
