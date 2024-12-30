@@ -38,10 +38,10 @@ WHERE "uid" = ${/^[a-zA-Z0-9]{7}$/.test(uid.replace(" ", ""))? uid : ""};
 
 
     
-      const getStatusColor = (cgpa: number) => {
-        if (cgpa >= 3.5) return 'text-green-600'
-        if (cgpa >= 3.0) return 'text-blue-600'
-        return 'text-yellow-600'
+      const getStatusColor = (probability: number) => {
+        if (probability >= 65) return 'text-green-600'
+        if (probability >= 40) return 'text-yellow-500'
+        return 'text-red-600'
       }
 
 
@@ -118,7 +118,7 @@ WHERE "uid" = ${/^[a-zA-Z0-9]{7}$/.test(uid.replace(" ", ""))? uid : ""};
 
           </div>            <div>
               <div className="text-sm text-gray-500">Status:</div>
-              <div className={`font-medium ${getStatusColor(student.cgpa)}`}>
+              <div className={`font-medium ${getStatusColor(student.probability)}`}>
                 {student.status}
               </div>
             </div>
@@ -130,16 +130,16 @@ WHERE "uid" = ${/^[a-zA-Z0-9]{7}$/.test(uid.replace(" ", ""))? uid : ""};
             <div className="text-sm text-gray-500">Probability:</div>
             <div className="relative w-full h-4 bg-white rounded-full mt-2">
               <div 
-                className="absolute left-0 top-0 h-full bg-gradient-to-r  rounded-full transition-all duration-500 ease-out"
+                className="overflow-x-hidden absolute left-0 top-0 h-full bg-gradient-to-r  rounded-full transition-all duration-500 ease-out"
                 style={{ width:`${student.probability}%` }}
               >
                               <div 
-                className="absolute left-0 top-0 h-full bg-gradient-to-r from-[#F5C900] to-[#183182]  rounded-full transition-all duration-500 ease-out"
-                style={{ width:`${student.probability}%` }}
+                className=" absolute left-0 top-0 h-full bg-gradient-to-r from-[#ff3434] via-[#F5C900] to-[#008241]  rounded-full transition-all duration-500 ease-out"
+                style={{ width:`${100*(100/student.probability)}%` }}
               />
               </div>
             </div>
-            <div className="text-right text-sm font-medium text-blue-600 mt-1">
+            <div className={`text-right text-sm font-medium ${getStatusColor(student.probability)} mt-1`}>
               {student.probability}%
             </div>
           </div>
