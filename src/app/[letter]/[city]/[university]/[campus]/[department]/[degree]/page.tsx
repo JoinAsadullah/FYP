@@ -25,7 +25,7 @@ export default async function Page({
         <Link
             className="rounded-lg border text-card-foreground shadow-sm bg-gray-200"
             data-v0-t="card"
-            href={`/${letter}/${city.slugify()}/${university.slugify()}/${campus.slugify()}/${department.slugify()}/16/${index+1}`}
+            href={`/${letter}/${city.slugify()}/${university.slugify()}/${campus.slugify()}/${department.slugify()}/${degree.slugify()}/${index+1}`}
             key={index}
           >
             <div className="flex flex-col space-y-1.5 p-6">
