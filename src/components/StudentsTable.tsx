@@ -73,13 +73,16 @@ export default function StudentsTable({ studentsData }: any) {
                         </tr>
                     </thead>
                     <tbody>
-                        {studentsData
-                          .filter((student:Student) =>{
-                            if(search === "") return student;
-                            return(
-                            student.name.toLowerCase().includes(search.toLowerCase()))}
-                          )
-                        .map((student:Student, index: number) => (
+                        {studentsData.length === 0 ? (
+                            <tr><td colSpan={10} className="text-center">No data found...</td></tr>
+                        ) : (
+                            studentsData
+                              .filter((student:Student) =>{
+                                if(search === "") return student;
+                                return(
+                                student.name.toLowerCase().includes(search.toLowerCase()))}
+                              )
+                            .map((student:Student, index: number) => (
                             <tr onClick={handleRowClick} id={student.uid} key={student.uid} className={`${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'} border-b h-10 hover:bg-gray-100 cursor-pointer`}>
                                 <td className="px-2 py-4 font-medium text-gray-900 whitespace-nowrap">{index + 1}</td>
                                 <td className="px-2 py-4 whitespace-nowrap"><p className='inline'>{student.uid}</p> <CopyIcon text={student.uid}/></td>
@@ -92,7 +95,7 @@ export default function StudentsTable({ studentsData }: any) {
                                 <td className="px-2 py-4 whitespace-nowrap">{student.cgpa}</td>
                                 <td className="px-2 py-4 whitespace-nowrap">{student.percentage}%</td>
                             </tr>
-                        ))}
+                        )))}
                     </tbody>
                 </table>
             </div>
