@@ -1,4 +1,5 @@
 'use client'
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 
 import { Inter } from "next/font/google";
@@ -21,26 +22,7 @@ export default function RootLayout({
   const [searchTerm, setSearchTerm] = useState('')
   const router = useRouter()
 
-  useEffect(() => {
-    // Load the Google Tag Manager script
-    const script = document.createElement('script');
-    script.async = true;
-    script.src = 'https://www.googletagmanager.com/gtag/js?id=G-NFBWBNWFKR';
-    document.head.appendChild(script);
 
-    // Initialize the gtag function and configuration
-    const initGtag = () => {
-      (window as any).dataLayer = (window as any).dataLayer || [];
-      function gtag(...args: any[]) {
-        (window as any).dataLayer.push(args);
-      }
-      gtag('js', new Date());
-      gtag('config', 'G-NFBWBNWFKR');
-    };
-
-    script.onload = initGtag;
-
-  }, []);
 
   const handleSearch = (e: React.FormEvent) => {
     
@@ -126,6 +108,7 @@ export default function RootLayout({
         </div>
         </main>
       </body>
+      <GoogleAnalytics gaId="G-NFBWBNWFKR" />
     </html>
   );
 }
