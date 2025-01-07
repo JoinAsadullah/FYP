@@ -74,7 +74,7 @@ export default function StudentsTable({ studentsData }: any) {
                     </thead>
                     <tbody>
                         {studentsData.length === 0 ? (
-                            <tr><td colSpan={10} className="text-center">No data found...</td></tr>
+                            <tr><td colSpan={10} className="p-2">No data found...</td></tr>
                         ) : (
                             studentsData
                               .filter((student:Student) =>{
