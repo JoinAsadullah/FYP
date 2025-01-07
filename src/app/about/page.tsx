@@ -15,7 +15,6 @@ export default function Home() {
               <p className="text-left text-gray-700 whitespace-wrap font-regular leading-none tracking-normal">
                 This system is designed to predict the probability of students getting the PMYP Laptop Award.
               </p>
-
     </section>
   );
 }

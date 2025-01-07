@@ -169,6 +169,38 @@ WHERE sp.uid = ${/^[a-zA-Z0-9]{7}$/.test(uid.replace(" ", ""))? uid : ""};
             </div>
           </div>
         </div>
+        <div className="text-xl font-bold text-gray-500 pt-6">ACADEMIC STANDINGS<br/> <p className="text-[13px] font-extralight text-gray-700 mt-0">(in your same dept and semester)</p> </div>
+
+        <div className="grid max-md:grid-cols-2 grid-cols-3 gap-6 ">
+          <div className="space-y-4">
+            <div>
+              <div className="text-sm text-gray-500">Position in Campus:</div>
+              <div className="font-medium text-wrap">{student.campus} </div>
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <div>
+              <div className="text-sm text-gray-500">Position in University:</div>
+              <div className="font-medium">{student.program}</div>
+            </div>
+
+          </div>
+
+          <div className="space-y-4">
+            <div>
+              <div className="text-sm text-gray-500">Position in City:</div>
+              <div className="font-medium">{student.cgpa}</div>
+            </div>
+
+          </div> 
+          
+        </div>
+        <div>
+              <div className="text-sm text-gray-500">Position in Pakistan:</div>
+              <div className="font-medium">{student.year}</div>
+            </div>
+
       </div>
     </div>
 
