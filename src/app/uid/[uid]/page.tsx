@@ -11,9 +11,27 @@ export default async function page({
 }) {
   const uid = (await params).uid
   const studentsData = await sql`
-  SELECT *
-FROM students
-WHERE "uid" = ${/^[a-zA-Z0-9]{7}$/.test(uid.replace(" ", ""))? uid : ""};
+  SELECT
+    sp.uid,
+    sp.name,
+    sp.roll_no,
+    un.university_name,
+    cp.campus_name,
+    pr.program,
+    sp.cgpa,
+    d.department_name,
+    dg.year_of_study,
+    pd.prediction,
+    sp.probability,
+    sp.suggestions 
+FROM student sp
+JOIN department d ON sp.department_value = d.department_value
+JOIN campus cp ON d.campus_uid = cp.campus_uid
+JOIN university un ON cp.university_uid = un.university_uid 
+JOIN degree_uid dg ON sp.degree_uid = dg.degree_uid
+JOIN program pr ON dg.prog_uid = pr.prog_uid
+JOIN pred_uid pd ON sp.pred_uid = pd.pred_uid
+WHERE sp.uid = ${/^[a-zA-Z0-9]{7}$/.test(uid.replace(" ", ""))? uid : ""};
 `
    if(studentsData.length === 0) {
     return(
@@ -24,12 +42,12 @@ WHERE "uid" = ${/^[a-zA-Z0-9]{7}$/.test(uid.replace(" ", ""))? uid : ""};
     const student = {
       uid: uid,
       name: studentsData[0].name,
-      university: studentsData[0].university,
+      university: studentsData[0].university_name,
       program: studentsData[0].program,
-      year: studentsData[0].year,
+      year: studentsData[0].year_of_study,
       cgpa: studentsData[0].cgpa,
-      campus: studentsData[0].campus,
-      department: studentsData[0].department,
+      campus: studentsData[0].campus_name,
+      department: studentsData[0].department_name,
       probability: studentsData[0].probability.replace('%', ''),
       sugestions: studentsData[0].suggestions,
       status: studentsData[0].prediction,

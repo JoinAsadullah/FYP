@@ -32,20 +32,30 @@ export default async function Page({
   const validatedDepartmentValue = departmentValue.replace(/\D/g, '')
   
   const studentsData = await sql`
-    SELECT 
-    "uid", 
-    "name", 
-    "father_name", 
-    "roll_no", 
-    "program", 
-    "year_of_study", 
-    "semester", 
-    "cgpa", 
-    "percentage"
-FROM students
-WHERE "department_value" = ${validatedDepartmentValue}
-  AND "degree" = ${validatedDegree}
-  AND ("year" = ${validatedYear} OR "year" = ${year == "5" ? "-1" : ""}) ;`
+
+  
+  SELECT
+    sp.uid,
+    sp.name,
+    sp.father_name,
+    sp.roll_no,
+    d.department_name,
+    dg.degree,
+    pr.program,
+    dg.year_of_study,
+    dg.semester,
+    sp.cgpa,
+    sp.percentage
+FROM student sp
+JOIN department d ON sp.department_value = d.department_value
+JOIN degree_uid dg ON sp.degree_uid = dg.degree_uid
+JOIN program pr ON dg.prog_uid = pr.prog_uid
+JOIN pred_uid p ON sp.pred_uid = p.pred_uid
+WHERE sp.department_value = ${validatedDepartmentValue}
+AND dg.degree = ${validatedDegree}
+AND (dg.year_of_study = ${validatedYear} OR  dg.year_of_study =  ${validatedYear == "5" ? "-1" : "9"} );
+  
+  `
 
   return (
     <StudentsTable studentsData={studentsData} />
