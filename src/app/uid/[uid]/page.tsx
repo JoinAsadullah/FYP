@@ -20,6 +20,7 @@ export default async function page({
     pr.program,
     sp.cgpa,
     d.department_name,
+    d.department_value,
     dg.year_of_study,
     pd.prediction,
     sp.probability,
@@ -33,6 +34,88 @@ JOIN program pr ON dg.prog_uid = pr.prog_uid
 JOIN pred_uid pd ON sp.pred_uid = pd.pred_uid
 WHERE sp.uid = ${/^[a-zA-Z0-9]{7}$/.test(uid.replace(" ", ""))? uid : ""};
 `
+  const campusPosition = await sql`
+SELECT count(*) as student_pos
+FROM student sp
+JOIN degree_uid dg ON sp.degree_uid = dg.degree_uid
+JOIN merit_uid mu ON sp.merit_uid = mu.merit_uid
+WHERE sp.department_value = ${studentsData[0].department_value}
+  AND sp.cgpa > (SELECT cgpa FROM student WHERE uid = ${/^[a-zA-Z0-9]{7}$/.test(uid.replace(" ", ""))? uid : ""})
+  AND mu.status != 'Disapproved'
+  AND sp.degree_uid = (SELECT degree_uid FROM student WHERE uid = ${/^[a-zA-Z0-9]{7}$/.test(uid.replace(" ", ""))? uid : ""});
+`
+  const universityPosition = await sql`
+SELECT COUNT(*) AS student_pos
+FROM student sp
+JOIN degree_uid dg ON sp.degree_uid = dg.degree_uid
+JOIN department d ON sp.department_value = d.department_value
+JOIN campus cp ON d.campus_uid = cp.campus_uid
+JOIN university un ON cp.university_uid = un.university_uid
+JOIN merit_uid mu ON sp.merit_uid = mu.merit_uid
+WHERE d.department_name = (
+      SELECT d.department_name
+      FROM student s
+      JOIN department d ON s.department_value = d.department_value
+      WHERE s.uid = ${/^[a-zA-Z0-9]{7}$/.test(uid.replace(" ", ""))? uid : ""}
+  )
+  AND un.university_uid = (
+      SELECT un.university_uid
+      FROM student s
+      JOIN department d ON s.department_value = d.department_value
+      JOIN campus cp ON d.campus_uid = cp.campus_uid
+      JOIN university un ON cp.university_uid = un.university_uid
+      WHERE s.uid = ${/^[a-zA-Z0-9]{7}$/.test(uid.replace(" ", ""))? uid : ""}
+  )
+  AND sp.degree_uid = (SELECT degree_uid FROM student WHERE uid = ${/^[a-zA-Z0-9]{7}$/.test(uid.replace(" ", ""))? uid : ""})
+  AND sp.cgpa > (SELECT cgpa FROM student WHERE uid = ${/^[a-zA-Z0-9]{7}$/.test(uid.replace(" ", ""))? uid : ""})
+  AND mu.status != 'Disapproved';
+`
+  const cityPosition = await sql`
+SELECT COUNT(*) AS student_pos
+FROM student sp
+JOIN degree_uid dg ON sp.degree_uid = dg.degree_uid
+JOIN department d ON sp.department_value = d.department_value
+JOIN campus cp ON d.campus_uid = cp.campus_uid
+JOIN university un ON cp.university_uid = un.university_uid
+JOIN city c ON un.city_code = c.city_code
+JOIN merit_uid mu ON sp.merit_uid = mu.merit_uid
+WHERE c.city_code = (
+      SELECT c.city_code
+      FROM student s
+      JOIN department d ON s.department_value = d.department_value
+      JOIN campus cp ON d.campus_uid = cp.campus_uid
+      JOIN university un ON cp.university_uid = un.university_uid
+      JOIN city c ON un.city_code = c.city_code
+      WHERE s.uid = ${/^[a-zA-Z0-9]{7}$/.test(uid.replace(" ", ""))? uid : ""}
+  )
+  AND d.department_name = (
+      SELECT d.department_name
+      FROM student s
+      JOIN department d ON s.department_value = d.department_value
+      WHERE s.uid = ${/^[a-zA-Z0-9]{7}$/.test(uid.replace(" ", ""))? uid : ""}
+  )
+  AND sp.degree_uid = (SELECT degree_uid FROM student WHERE uid = ${/^[a-zA-Z0-9]{7}$/.test(uid.replace(" ", ""))? uid : ""})
+  AND sp.cgpa > (SELECT cgpa FROM student WHERE uid = ${/^[a-zA-Z0-9]{7}$/.test(uid.replace(" ", ""))? uid : ""})
+  AND mu.status != 'Disapproved';
+`
+  const pakistanPosition = await sql`
+SELECT COUNT(*) AS student_pos
+FROM student sp
+JOIN degree_uid dg ON sp.degree_uid = dg.degree_uid
+JOIN department d ON sp.department_value = d.department_value
+JOIN merit_uid mu ON sp.merit_uid = mu.merit_uid
+WHERE d.department_name = (
+      SELECT d.department_name
+      FROM student s
+      JOIN department d ON s.department_value = d.department_value
+      WHERE s.uid = ${/^[a-zA-Z0-9]{7}$/.test(uid.replace(" ", ""))? uid : ""}
+  )
+  AND sp.degree_uid = (SELECT degree_uid FROM student WHERE uid = ${/^[a-zA-Z0-9]{7}$/.test(uid.replace(" ", ""))? uid : ""})
+  AND sp.cgpa > (SELECT cgpa FROM student WHERE uid = ${/^[a-zA-Z0-9]{7}$/.test(uid.replace(" ", ""))? uid : ""})
+  AND mu.status != 'Disapproved';
+`
+
+
    if(studentsData.length === 0) {
     return(
       <h1>No data is found.</h1>
@@ -169,28 +252,27 @@ WHERE sp.uid = ${/^[a-zA-Z0-9]{7}$/.test(uid.replace(" ", ""))? uid : ""};
             </div>
           </div>
         </div>
-        <div className="text-xl font-bold text-gray-500 pt-6">ACADEMIC STANDINGS<br/> <p className="text-[13px] font-extralight text-gray-700 mt-0">(in your same dept and semester)</p> </div>
+        <div className="text-xl font-bold text-gray-500 pt-6">ACADEMIC STANDINGS<br/> <p className="text-[13px] font-extralight text-gray-500 mt-0">(in your same dept and semester)</p> </div>
 
         <div className="grid max-md:grid-cols-2 grid-cols-3 gap-6 ">
           <div className="space-y-4">
             <div>
               <div className="text-sm text-gray-500">Position in Campus:</div>
-              <div className="font-medium text-wrap">{student.campus} </div>
+              <div className="font-medium text-wrap">{Number(campusPosition[0].student_pos)+1} </div>
             </div>
           </div>
 
           <div className="space-y-4">
             <div>
               <div className="text-sm text-gray-500">Position in University:</div>
-              <div className="font-medium">{student.program}</div>
+              <div className="font-medium">{Number(universityPosition[0].student_pos)+1}</div>
             </div>
-
           </div>
 
           <div className="space-y-4">
             <div>
               <div className="text-sm text-gray-500">Position in City:</div>
-              <div className="font-medium">{student.cgpa}</div>
+              <div className="font-medium">{Number(cityPosition[0].student_pos)+1}</div>
             </div>
 
           </div> 
@@ -198,9 +280,8 @@ WHERE sp.uid = ${/^[a-zA-Z0-9]{7}$/.test(uid.replace(" ", ""))? uid : ""};
         </div>
         <div>
               <div className="text-sm text-gray-500">Position in Pakistan:</div>
-              <div className="font-medium">{student.year}</div>
+              <div className="font-medium">{Number(pakistanPosition[0].student_pos)+1}</div>
             </div>
-
       </div>
     </div>
 

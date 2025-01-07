@@ -35,7 +35,7 @@ export default async function Page({
 else{
 
   return (
-    <section className=" bg-white relative py-20 md:mx-20 mx-4">
+    <><section className=" bg-white relative py-20 md:mx-20 mx-4">
       <h2 className="my-2 text-xl font-semibold text-gray-800">UID</h2>
 
 
@@ -55,5 +55,9 @@ else{
     </form>
 
     </section>
+        <section className=" bg-white relative py-20 md:mx-20 mx-4">
+
+
+        </section></>
   );}
 }
