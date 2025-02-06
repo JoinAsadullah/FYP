@@ -104,7 +104,7 @@ export default function RootLayout({
           </div>
         <div>
           <footer className="fixed bottom-0 w-full bg-gray-200 py-2 flex justify-center items-center">
-            <p className="text-gray-500 text-center text-sm"> QAS © 2025. All rights reserved.<br/>Made with 💚 by <Link className="text-blue-600" href={"https://www.linkedin.com/in/iammqaisar/"}>Qaisar</Link>, <Link className="text-blue-600" href={"https://www.linkedin.com/in/joinasadullah/"}>Asadullah</Link> and <Link className="text-blue-600" href={"https://github.com/SobanJ"}>Soban</Link></p>
+            <p className="text-gray-500 text-center text-sm"> QAS © 2025. All rights reserved.<br/>Developed by <Link className="text-blue-600" href={"https://github.com/ProfessorHusnain/"}>Professor Husnain</Link></p>
           </footer>
         </div>
         </main>
