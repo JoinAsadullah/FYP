@@ -13,5 +13,5 @@ QAS provides a percentage-based analysis of your eligibility for the PM Laptop A
 
 ## Screenshots
 
-![QAS Screenshot 1](public/images/screenshot1)
-![QAS Screenshot 2](public/images/screenshot2)
+![QAS Screenshot 1](public/images/screenshot1.png)
+![QAS Screenshot 2](public/images/screenshot2.png)
